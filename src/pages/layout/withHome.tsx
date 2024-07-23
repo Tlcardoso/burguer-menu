@@ -8,9 +8,7 @@ const withHome = (props: IwithHomeProp) => {
     const [navbar, setNavbar] = useState(false);
 
     return (
-      <div
-        className='w-screen h-screen'
-      >
+      <div className='w-screen h-screen overflow-hidden'>
         <Navbar title={props.title} setNavbar={setNavbar} navbar={navbar} />
         {navbar && (
           <MobileNavbar />

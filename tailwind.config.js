@@ -10,6 +10,8 @@ export default {
         primary: 'var(--primary-color)',
         background: 'var(--background-color)',
         navBackground: 'var(--nav-background-color)',
+        gray: '#EEEEEE',
+        lightGray: '#F8F9FA',
       },
     },
   },

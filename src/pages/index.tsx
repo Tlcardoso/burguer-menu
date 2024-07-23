@@ -1,6 +1,7 @@
+import MenuTemplate from '../templates/menu';
 import { withHome } from './layout/withHome';
 
-const MenuPage = () => <div>oi</div>;
+const MenuPage = () => <MenuTemplate />;
 
 const renderMenuPage = {
   children: MenuPage,

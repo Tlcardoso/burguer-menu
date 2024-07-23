@@ -7,9 +7,19 @@
   --primary-color: #4f372f;
   --background-color: #ffffff;
   --nav-background-color: #4f372f;
-  --navbar-height: 64px;
+  --navbar-height: 52px;
+  --mobile-navbar-height: 64px;
 }
 
 .mobile-navbar {
-  height: calc(100vh - var(--navbar-height));
+  height: calc(100vh - var(--mobile-navbar-height));
+}
+
+.container-size {
+  width: 100%;
+  height: calc(100% - var(--mobile-navbar-height) - 150px);
+  
+  @media (min-width: 768px) {
+    height: calc(100% - var(--navbar-height) - 150px);
+  }
 }
