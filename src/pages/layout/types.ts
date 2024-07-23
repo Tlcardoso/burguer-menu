@@ -1,3 +1,4 @@
 export interface IwithHomeProp {
-  children: () => JSX.Element
+  children: () => JSX.Element,
+  title: string,
 }
