@@ -17,7 +17,6 @@ module.exports = {
     'indent': ['error', 2], // Indentação de 2 espaços
     'quotes': ['error', 'single'], // Usar aspas simples
     'semi': ['error', 'always'], // Sempre usar ponto e vírgula
-    'linebreak-style': ['error', 'unix'], // Usar estilo de quebra de linha Unix (LF)
     'eol-last': ['error', 'always'], // Exigir uma linha vazia no final dos arquivos
     'no-trailing-spaces': 'error', // Não permitir espaços em branco no final das linhas
     'comma-dangle': ['error', 'always-multiline'], // Exigir vírgula no final de listas e objetos multilinha
