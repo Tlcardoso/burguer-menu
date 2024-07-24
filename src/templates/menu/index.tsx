@@ -1,6 +1,9 @@
 import { Hero } from '../../components';
+import { useOneVenueQuery } from '../../services/VenueServices';
 
 const MenuTemplate = () => {
+  const { data } = useOneVenueQuery('9');
+
   return (
     <div className='w-full h-full'>
       <Hero
