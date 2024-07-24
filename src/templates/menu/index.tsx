@@ -1,14 +1,14 @@
 import { Hero } from '../../components';
-import { useOneVenueQuery } from '../../services/VenueServices';
+import { useSelector } from 'react-redux';
+import { venueData } from '../../features/venue/selector';
 
 const MenuTemplate = () => {
-  const { data } = useOneVenueQuery('9');
-  console.log(data);
+  const { venue } = useSelector(venueData);
 
   return (
     <div className='w-full h-full'>
       <Hero
-        src="https://preodemo.gumlet.io/usr/venue/7602/web/646fbf3abf9d0.png"
+        src={venue?.data?.webSettings?.bannerImage || ''}
       />
       <div
         className='container-size md:px-52 md:pb-9'

@@ -1,12 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { PayloadAction } from '@reduxjs/toolkit';
 import { storage } from '../../store/persist';
 import { ViewVenueOutput } from '../../services/VenueServices/types';
 
-type VenueDataType = {
-  items: ViewVenueOutput[];
-  lastUpdated: string;
-};
+type VenueDataType = ViewVenueOutput
 
 type StateType = {
   data: VenueDataType | null;
