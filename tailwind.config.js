@@ -22,6 +22,7 @@ module.exports = {
         background: 'var(--background-color)',
         navBackground: 'var(--nav-background-color)',
         gray: '#EEEEEE',
+        darkGray: '#8A94A4',
         lightGray: '#F8F9FA',
       },
       keyframes: {

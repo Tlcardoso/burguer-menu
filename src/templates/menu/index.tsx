@@ -1,4 +1,4 @@
-import { Hero, SkeletonCard } from '../../components';
+import { Hero, Input, SkeletonCard } from '../../components';
 import { useSelector } from 'react-redux';
 import { venueData } from '../../features/venue/selector';
 import { useGetMenuQuery } from '../../services/VenueServices';
@@ -30,6 +30,13 @@ const MenuTemplate = () => {
           <div
             className='container-size md:px-52 md:pb-9'
           >
+            <div
+              className='w-full bg-lightGray md:bg-transparent p-4 md:px-0'
+            >
+              <Input
+                placeholder="Search menu items"
+              />
+            </div>
             <div
               className='w-full h-full bg-lightGray'
             >
