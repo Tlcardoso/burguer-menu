@@ -48,6 +48,7 @@ const withHome = (props: IwithHomeProp) => {
           <MobileNavbar />
         )}
         <props.children />
+
       </div>
     );
   };
