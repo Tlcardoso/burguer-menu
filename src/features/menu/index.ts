@@ -1,6 +1,6 @@
-import venue from './slice';
+import menu from './slice';
 
-const { reducer } = venue;
+const { reducer } = menu;
 
-export const { setMenuData } = venue.actions;
+export const { setMenuData } = menu.actions;
 export default reducer;

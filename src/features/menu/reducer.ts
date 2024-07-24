@@ -1,8 +1,17 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { PayloadAction } from '@reduxjs/toolkit';
 import { storage } from '../../store/persist';
+import { ViewMenuOutput } from '../../services/VenueServices/types';
 
-const setMenuData = (state: any, action: PayloadAction<any>) => {
+type MenuDataType = {
+  items: ViewMenuOutput[];
+  lastUpdated: string;
+};
+
+type StateType = {
+  data: MenuDataType | null;
+};
+
+const setMenuData = (state: StateType, action: PayloadAction<{ data: MenuDataType }>) => {
   const { data } = action.payload;
   state.data = data;
 
