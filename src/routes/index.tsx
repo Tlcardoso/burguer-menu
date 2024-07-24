@@ -3,7 +3,7 @@ import MenuPage from '../pages/index';
 
 const routes: RouteObject[] = [
   {
-    path: '',
+    path: '/menu/:id',
     element: <MenuPage />,
   },
 ];

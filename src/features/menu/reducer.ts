@@ -2,10 +2,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { storage } from '../../store/persist';
 import { ViewMenuOutput } from '../../services/VenueServices/types';
 
-type MenuDataType = {
-  items: ViewMenuOutput[];
-  lastUpdated: string;
-};
+type MenuDataType = ViewMenuOutput
 
 type StateType = {
   data: MenuDataType | null;

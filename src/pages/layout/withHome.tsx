@@ -6,11 +6,13 @@ import { changeColorStyle } from '../../utils/variables';
 import { useAppDispatch } from '../../store/store';
 import { setVenueData } from '../../features/venue';
 import { useOneVenueQuery } from '../../services/VenueServices';
+import { useParams } from 'react-router-dom';
 
 const withHome = (props: IwithHomeProp) => {
   const PageWithHome = () => {
+    const { id } = useParams();
     const [navbar, setNavbar] = useState(false);
-    const { data } = useOneVenueQuery('9');
+    const { data } = useOneVenueQuery(id || '');
     const dispatch = useAppDispatch();
 
     useEffect(() => {
