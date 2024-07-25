@@ -1,13 +1,15 @@
-import { AccordionContainer, Hero, Input, ItemCard, SkeletonCard } from '../../components';
+import { AccordionContainer, Hero, Input, ItemCard, ItemModal, SkeletonCard } from '../../components';
 import { useSelector } from 'react-redux';
 import { venueData } from '../../features/venue/selector';
 import { useGetMenuQuery } from '../../services/VenueServices';
 import { useState } from 'react';
+import { Item } from '../../services/VenueServices/types';
 
 const MenuTemplate = () => {
   const { venue } = useSelector(venueData);
   const { data } = useGetMenuQuery({});
   const [selectedItem, setSelectedItem] = useState<string>('');
+  const [itemToShow, setItemToShow] = useState<Item | null>(null);
   const filteredItemList = selectedItem.length ? data?.sections.filter((item) => item.name === selectedItem) : data?.sections;
 
   const handleSelectItem = (name: string) => {
@@ -67,6 +69,7 @@ const MenuTemplate = () => {
                       key={item.name}
                       name={item.name}
                       items={item.items}
+                      onClick={setItemToShow}
                     />
                   ))}
                 </div>
@@ -78,6 +81,10 @@ const MenuTemplate = () => {
               </div>
             </div>
           </div>
+          <ItemModal
+            item={itemToShow}
+            setItem={setItemToShow}
+          />
         </>
       )}
     </div>

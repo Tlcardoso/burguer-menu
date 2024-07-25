@@ -8,7 +8,7 @@ import useWebSettings from '../../hook/useSession';
 import { formatPrice } from '../../utils/internationalization';
 import { AccordionType } from './types';
 
-export const AccordionContainer = ({ name, items }: AccordionType) => {
+export const AccordionContainer = ({ name, items, onClick }: AccordionType) => {
   const settings = useWebSettings();
   return (
     <Accordion type="single" collapsible className='w-full'>
@@ -21,7 +21,8 @@ export const AccordionContainer = ({ name, items }: AccordionType) => {
         {items?.map((item) => (
           <AccordionContent
             key={item.id}
-            className='flex gap-4 justify-between'
+            className='flex gap-4 justify-between cursor-pointer'
+            onClick={() => onClick(item)}
           >
             <div
               className='flex flex-col items-start justify-start gap-1 w-2/3'
