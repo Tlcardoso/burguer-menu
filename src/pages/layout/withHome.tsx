@@ -7,6 +7,7 @@ import { useAppDispatch } from '../../store/store';
 import { setVenueData } from '../../features/venue';
 import { useOneVenueQuery } from '../../services/VenueServices';
 import { useParams } from 'react-router-dom';
+import { environment } from '../../config/enviroments';
 
 const withHome = (props: IwithHomeProp) => {
   const PageWithHome = () => {
@@ -37,12 +38,22 @@ const withHome = (props: IwithHomeProp) => {
           },
         ];
 
+        const formattedLocaleConfig = {
+          ccy: data.ccy,
+          ccySymbol: data.ccySymbol,
+          locale: data.locale,
+          timezoneOffset: data.timezoneOffset,
+        };
+
+        const localeSettings = JSON.stringify(formattedLocaleConfig);
+        sessionStorage.setItem(environment.localeSettings, localeSettings);
+
         changeColorStyle(formattedConfig);
       }
     }, [data]);
 
     return (
-      <div className='w-screen h-screen overflow-hidden'>
+      <div className='w-screen h-screen overflow-x-hidden overflow-y-auto'>
         <Navbar title={props.title} setNavbar={setNavbar} navbar={navbar} />
         {navbar && (
           <MobileNavbar />
