@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import {
   Accordion,
   AccordionContent,
@@ -6,10 +7,14 @@ import {
 } from '../../components/ui/accordion';
 import useWebSettings from '../../hook/useSession';
 import { formatPrice } from '../../utils/internationalization';
+import { calculateTotalQtyByName } from '../../utils/numbers';
 import { AccordionType } from './types';
+import { basketData } from '../../features/basket/selector';
 
 export const AccordionContainer = ({ name, items, onClick }: AccordionType) => {
   const settings = useWebSettings();
+  const { basket } = useSelector(basketData);
+
   return (
     <Accordion type="single" collapsible className='w-full'>
       <AccordionItem value="item-1">
@@ -27,11 +32,22 @@ export const AccordionContainer = ({ name, items, onClick }: AccordionType) => {
             <div
               className='flex flex-col items-start justify-start gap-1 w-2/3'
             >
-              <h1
-                className='font-semibold text-black text-base outline-none'
+              <div
+                className='flex gap-2'
               >
-                {item.name}
-              </h1>
+                {calculateTotalQtyByName(basket?.data, item.name) > 0 && (
+                  <div
+                    className='w-6 h-6 bg-primary flex justify-center items-center text-white rounded-md text-sm font-medium'
+                  >
+                    {calculateTotalQtyByName(basket?.data, item.name)}
+                  </div>
+                )}
+                <h1
+                  className='font-semibold text-black text-base outline-none'
+                >
+                  {item.name}
+                </h1>
+              </div>
               <p
                 className=' w-full font-light text-black text-base outline-none line-clamp-2 text-ellipsis '
               >

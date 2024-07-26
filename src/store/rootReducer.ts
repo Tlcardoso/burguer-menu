@@ -3,7 +3,7 @@ import { baseApi } from '../services';
 import { persistConfig, persistReducer } from './persist';
 import venueReducer from '../features/venue';
 import menuReducer from '../features/menu';
-import baskedReducer from '../features/menu';
+import baskedReducer from '../features/basket';
 
 const rootReducer = combineReducers({
   basket: baskedReducer,

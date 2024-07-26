@@ -1,6 +1,8 @@
-const emptyBasket = {};
+import { BasketItemType } from './reducer';
 
-const storedData = localStorage.getItem('menu');
+const emptyBasket: BasketItemType[] = [];
+
+const storedData = localStorage.getItem('basket');
 const basket = storedData
   ? JSON.parse(storedData)
   : emptyBasket;

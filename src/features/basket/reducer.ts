@@ -1,34 +1,61 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { storage } from '../../store/persist';
+import { ModifierItem } from '../../services/VenueServices/types';
+import { v4 as uuidv4 } from 'uuid';
 
-type BasketItemType = {
+export type BasketItemType = {
   name: string;
-  id: string;
+  id: number;
   price: number;
   qty: number;
-  items: {
-    name: string;
-    price: number;
-  }[];
+  items: ModifierItem | null;
+  uuid?: string;
 };
 
-type BasketType = {
-  items: BasketItemType[];
-  subTotal: number;
-  total: number;
-};
+type BasketType = BasketItemType
 
 type StateType = {
-  data: BasketType | null;
+  data: BasketItemType[];
 };
 
-const setBasketData = (state: StateType, action: PayloadAction<{ data: BasketType }>) => {
-  const { data } = action.payload;
-  state.data = data;
+type UpdateQtyPayload = {
+  groupId?: string;
+  increment: boolean;
+};
 
-  storage.setItem('venue', JSON.stringify(data));
+const setBasketData = (state: StateType, action: PayloadAction<BasketType>) => {
+  const newItem = action.payload;
+  const newGroup = {
+    uuid: uuidv4(),
+    ...newItem,
+  };
+  state.data.push(newGroup);
+};
+
+const updateItemQuantity = (state: StateType, action: PayloadAction<UpdateQtyPayload>) => {
+  const { groupId, increment } = action.payload;
+  const groupIndex = state.data.findIndex(group => group.uuid === groupId);
+
+  if (groupIndex !== -1) {
+    const group = state.data[groupIndex];
+
+    if (increment) {
+      group.qty += 1;
+    } else {
+      if (group.qty > 1) {
+        group.qty -= 1;
+      } else {
+        state.data.splice(groupIndex, 1);
+        return;
+      }
+    }
+
+    if (group.qty > 0) {
+      state.data[groupIndex] = group;
+    }
+  }
 };
 
 export {
   setBasketData,
+  updateItemQuantity,
 };

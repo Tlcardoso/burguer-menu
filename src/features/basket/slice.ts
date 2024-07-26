@@ -1,12 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { initialState } from './initialState';
-import { setBasketData } from './reducer';
+import { setBasketData, updateItemQuantity } from './reducer';
 
 const slice = createSlice({
-  name: 'menu',
+  name: 'basket',
   initialState,
   reducers: {
     setBasketData,
+    updateItemQuantity,
   },
 });
 

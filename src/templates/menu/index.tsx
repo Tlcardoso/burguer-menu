@@ -1,15 +1,19 @@
-import { AccordionContainer, Hero, Input, ItemCard, ItemModal, SkeletonCard } from '../../components';
+import { AccordionContainer, Basket, Button, Hero, Input, ItemCard, ItemModal, SkeletonCard } from '../../components';
 import { useSelector } from 'react-redux';
 import { venueData } from '../../features/venue/selector';
 import { useGetMenuQuery } from '../../services/VenueServices';
 import { useState } from 'react';
 import { Item } from '../../services/VenueServices/types';
+import { calculateTotalQty } from '../../utils/numbers';
+import { basketData } from '../../features/basket/selector';
 
 const MenuTemplate = () => {
   const { venue } = useSelector(venueData);
+  const { basket } = useSelector(basketData);
   const { data } = useGetMenuQuery({});
   const [selectedItem, setSelectedItem] = useState<string>('');
   const [itemToShow, setItemToShow] = useState<Item | null>(null);
+  const [showBasket, setShowBasket] = useState<boolean>(false);
   const filteredItemList = selectedItem.length ? data?.sections.filter((item) => item.name === selectedItem) : data?.sections;
 
   const handleSelectItem = (name: string) => {
@@ -73,11 +77,23 @@ const MenuTemplate = () => {
                     />
                   ))}
                 </div>
+                <div
+                  className={`fixed bottom-0 w-full p-4 ${calculateTotalQty(basket?.data) > 0 ? 'block' : 'hidden'} md:hidden`}
+                >
+                  <Button
+                    variant={'default'}
+                    onClick={() => setShowBasket(true)}
+                  >
+                    Your basket • {calculateTotalQty(basket?.data)} item
+                  </Button>
+                </div>
               </div>
               <div
-                className='md:w-1/3 h-full md:bg-white md:shadow-xl'
+                className={`absolute w-full z-50 animate-slideInRight md:animate-none top-0 md:block md:w-1/3 h-full bg-white md:shadow-xl md:relative ${showBasket ? 'block' : 'hidden'}`}
               >
-                basket
+                <Basket
+                  setShowBasket={setShowBasket}
+                />
               </div>
             </div>
           </div>

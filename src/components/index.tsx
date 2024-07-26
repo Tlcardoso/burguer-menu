@@ -8,3 +8,4 @@ export { AccordionContainer } from './accordion';
 export { ItemModal } from './itemModal';
 export { Button } from './button';
 export { RadioButtonGroup } from './radioButtonGroup';
+export { Basket } from './basket';

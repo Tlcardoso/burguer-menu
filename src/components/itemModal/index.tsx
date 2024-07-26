@@ -8,15 +8,32 @@ import { useState } from 'react';
 import useWebSettings from '../../hook/useSession';
 import { formatPrice } from '../../utils/internationalization';
 import { FiMinus, FiPlus } from 'react-icons/fi';
+import { useAppDispatch } from '../../store/store';
+import { setBasketData } from '../../features/basket';
+import { ModifierItem } from '../../services/VenueServices/types';
+import { BasketItemType } from '../../features/basket/reducer';
 
 export const ItemModal = ({ item, setItem }: ItemModalTypes) => {
   if (!item) return null;
-  const [selectedValue, setSelectedValue] = useState<number | null>(null);
+  const [selectedValue, setSelectedValue] = useState<ModifierItem | null>(null);
   const [itemCounter, setItemCounter] = useState<number>(1);
   const settings = useWebSettings();
+  const dispatch = useAppDispatch();
 
-  const handleChange = (value: number) => {
+  const handleChange = (value: ModifierItem) => {
     setSelectedValue(value);
+  };
+
+  const handleSubmit = () => {
+    const formattedItemToBasket: BasketItemType = {
+      name: item.name,
+      id: item.id,
+      price: selectedValue?.price || item.price,
+      qty: itemCounter,
+      items: selectedValue,
+    };
+    dispatch(setBasketData(formattedItemToBasket));
+    setItem(null);
   };
 
   return (
@@ -90,8 +107,8 @@ export const ItemModal = ({ item, setItem }: ItemModalTypes) => {
                     >
                       <RadioButtonGroup
                         item={item}
-                        checked={item.price === selectedValue}
-                        onClick={() => handleChange(item.price)}
+                        checked={item.price === selectedValue?.price}
+                        onClick={() => handleChange(item)}
                       />
                     </RadioGroup>
                   );
@@ -124,8 +141,9 @@ export const ItemModal = ({ item, setItem }: ItemModalTypes) => {
             </div>
             <Button
               variant={'default'}
+              onClick={() => handleSubmit()}
             >
-              Add to Order • {formatPrice((selectedValue || item.price) * itemCounter, settings?.ccy || 'BRL', settings?.locale || 'pt-BR')}
+              Add to Order • {formatPrice((selectedValue?.price || item.price) * itemCounter, settings?.ccy || 'BRL', settings?.locale || 'pt-BR')}
             </Button>
           </div>
         </div>
