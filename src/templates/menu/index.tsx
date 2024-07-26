@@ -89,7 +89,7 @@ const MenuTemplate = () => {
                 </div>
               </div>
               <div
-                className={`absolute w-full z-50 animate-slideInRight md:animate-none top-0 md:block md:w-1/3 h-full bg-white md:shadow-xl md:relative ${showBasket ? 'block' : 'hidden'}`}
+                className={`absolute w-full z-50 md:z-10 animate-slideInRight md:animate-none top-0 md:block md:w-1/3 h-full bg-white md:shadow-xl md:relative ${showBasket ? 'block' : 'hidden'}`}
               >
                 <Basket
                   setShowBasket={setShowBasket}

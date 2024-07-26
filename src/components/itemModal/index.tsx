@@ -40,9 +40,9 @@ export const ItemModal = ({ item, setItem }: ItemModalTypes) => {
     <div
       className={`absolute w-screen h-screen flex justify-center items-center top-0 ${item ? 'block' : 'hidden'}`}
     >
-      <div className="absolute w-full h-full bg-black opacity-50" />
+      <div className="absolute w-full h-full bg-black opacity-50 z-40" />
       <div
-        className="w-[363px] md:w-[393px] bg-white relative z-40"
+        className="w-[363px] md:w-[393px] bg-white relative z-50"
       >
         <div
           className='absolute right-4 top-6'
